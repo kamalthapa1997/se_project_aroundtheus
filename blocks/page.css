@@ -1,0 +1,23 @@
+.page {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+.page__content {
+  width: 100%;
+  margin: auto;
+  /* width: calc(100% - 400px); */
+  display: grid;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: roboto, "inter", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.2;
+}
