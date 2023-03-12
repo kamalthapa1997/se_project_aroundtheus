@@ -9,7 +9,6 @@
   margin: 0;
 }
 .card__content {
-  border: 1px solid red;
   border-radius: 10px;
   overflow: hidden;
   background-color: #eeeeee;
@@ -63,10 +62,15 @@
   padding: 0;
   border: none;
   margin: 0;
+  transition: opacity 0.5s linear;
+  cursor: pointer;
 }
 .card__image-like {
   width: 21px;
   height: 18px;
+}
+.card__button :hover {
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 766px) {
