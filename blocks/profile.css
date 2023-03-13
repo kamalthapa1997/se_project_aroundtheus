@@ -3,6 +3,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 40px;
+  gap: 20px;
 }
 .profile__image {
   margin-right: 30px;
