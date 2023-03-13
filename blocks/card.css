@@ -1,4 +1,7 @@
 .card {
+  margin-top: 48px;
+}
+.card__lists {
   max-width: 880px;
   width: 100%;
   display: grid;
@@ -17,7 +20,6 @@
 .card__image {
   width: 282px;
   height: 282px;
-  background: transparent cover center no-repeat;
 }
 
 .card__image-title {
@@ -43,7 +45,7 @@
   margin: 0;
 
   cursor: pointer;
-  background: url(../images/heart.png) no-repeat center;
+  background: url(../images/heart.svg) no-repeat center;
   min-width: 21px;
   height: 18px;
   transition: opacity 0.5s linear;
@@ -53,15 +55,14 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 880px) {
-  .card {
+@media screen and (max-width: 900px) {
+  .card__lists {
     grid-template-columns: repeat(2, 282px);
     justify-content: center;
   }
 }
 @media screen and (max-width: 600px) {
-  .card {
+  .card__lists {
     grid-template-columns: 282px;
-    justify-content: center;
   }
 }
