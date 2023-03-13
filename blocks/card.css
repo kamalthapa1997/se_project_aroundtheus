@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
   gap: 17px;
-  grid-template-rows: repeat(auto-fit, 361px);
+
   padding: 0;
   margin: 0;
 }
@@ -17,31 +17,9 @@
 .card__image {
   width: 282px;
   height: 282px;
+  background: transparent cover center no-repeat;
 }
-.card__image-vally {
-  background: transparent url(../images/yosemite.jpg) center no-repeat;
-  background-size: cover;
-}
-.card__image-lake {
-  background: transparent url(../images/lake-louise.jpg) center no-repeat;
-  background-size: cover;
-}
-.card__image-mountain {
-  background: transparent url(../images/bald-mountains.jpg) center no-repeat;
-  background-size: cover;
-}
-.card__image-latemar {
-  background: transparent url(../images/latemar.jpg) center no-repeat;
-  background-size: cover;
-}
-.card__image-vanoise {
-  background: transparent url(../images/vanoise.jpg) center no-repeat;
-  background-size: cover;
-}
-.card__image-lago {
-  background: transparent url(../images/lago.jpg) center no-repeat;
-  background-size: cover;
-}
+
 .card__image-title {
   font-family: "Inter", sans-serif;
   font-size: 24px;
@@ -51,37 +29,39 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
 }
 .card__image-descriptions {
   display: flex;
   justify-content: space-between;
-  margin: auto 20px;
+  padding: 25px 20px;
   align-items: center;
 }
 .card__button {
   padding: 0;
   border: none;
   margin: 0;
-  transition: opacity 0.5s linear;
+
   cursor: pointer;
-}
-.card__image-like {
-  width: 21px;
+  background: url(../images/heart.png) no-repeat center;
+  min-width: 21px;
   height: 18px;
+  transition: opacity 0.5s linear;
 }
-.card__button :hover {
+
+.card__button:hover {
   opacity: 0.5;
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 880px) {
   .card {
-    grid-template-columns: 282px;
+    grid-template-columns: repeat(2, 282px);
     justify-content: center;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1000px) {
+@media screen and (max-width: 600px) {
   .card {
-    grid-template-columns: repeat(2, 282px);
+    grid-template-columns: 282px;
     justify-content: center;
   }
 }

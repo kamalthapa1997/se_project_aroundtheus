@@ -1,6 +1,4 @@
 .profile {
-  /* max-width: 880px; */
-  min-height: 120px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -29,6 +27,9 @@
   font-size: 42px;
   font-weight: 500;
   line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .profile__subtitle {
   grid-area: description;
@@ -40,7 +41,7 @@
 }
 
 .profile__editor {
-  background: url(../images/editor.png) transparent center no-repeat;
+  background: url(../images/editor.svg) transparent center no-repeat;
   border: 1px solid white;
 
   grid-area: button;
@@ -54,10 +55,11 @@
   opacity: 0.5;
 }
 .profile__add-editor {
-  background: url(../images/add-editor.png) transparent center no-repeat;
+  background: url(../images/add-editor.svg) transparent center no-repeat;
   min-width: 150px;
   min-height: 50px;
-  border: 1px solid white;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
   padding: 0;
   box-sizing: border-box;
   margin-left: auto;
@@ -67,42 +69,46 @@
 .profile__add-editor:hover {
   opacity: 0.5;
 }
-@media screen and (max-width: 766px) {
-  .profile {
-    display: grid;
-    justify-content: center;
-    width: 100%;
-  }
-  .profile__title {
-    font-family: "Inter", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.2;
-  }
 
-  .profile__image {
-    margin: auto;
-  }
-  .profile__informations {
-    justify-content: center;
-    margin-top: 26px;
-  }
-  .profile__subtitle {
-    margin: 15px auto 0;
-  }
-  .profile__add-editor {
-    width: 100%;
-    min-width: 283px;
-    margin-top: 35px;
-  }
-}
-@media screen and (min-width: 768px) and (max-width: 1280px) {
+@media screen and (max-width: 800px) {
   .profile {
-    display: flex;
     width: 100%;
     gap: 30px;
   }
   .profile__image {
     margin: 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  .profile {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    gap: 0;
+  }
+  .profile__image {
+    margin: auto;
+  }
+  .profile__title {
+    font-size: 22px;
+  }
+
+  .profile__informations {
+    justify-content: center;
+    margin-top: 26px;
+  }
+  .profile__editor {
+    min-width: 15px;
+    min-height: 15px;
+  }
+  .profile__subtitle {
+    margin: 15px auto 0;
+    font-size: 14px;
+    line-height: 0.8;
+  }
+  .profile__add-editor {
+    width: 100%;
+    min-width: 283px;
+    margin-top: 35px;
   }
 }

@@ -2,11 +2,20 @@
   font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 0.8;
   color: #545454;
   margin: 0;
 }
 .footer {
   padding: 60px 0;
   width: 100%;
+}
+@media screen and (max-width: 600px) {
+  .footer {
+    padding: 40px 0 40px 27px;
+    box-sizing: border-box;
+  }
+  .footer__address {
+    font-size: 14px;
+  }
 }
