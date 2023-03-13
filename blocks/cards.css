@@ -1,7 +1,7 @@
-.card {
+.cards {
   margin-top: 48px;
 }
-.card__lists {
+.cards__list {
   max-width: 880px;
   width: 100%;
   display: grid;
@@ -11,18 +11,18 @@
   padding: 0;
   margin: 0;
 }
-.card__content {
+.cards__content {
   border-radius: 10px;
   overflow: hidden;
   background-color: #eeeeee;
   list-style-type: none;
 }
-.card__image {
+.cards__image {
   width: 282px;
   height: 282px;
 }
 
-.card__image-title {
+.cards__image-title {
   font-family: "Inter", sans-serif;
   font-size: 24px;
   font-weight: 900;
@@ -33,13 +33,13 @@
   overflow: hidden;
   margin: 0;
 }
-.card__image-descriptions {
+.cards__image-descriptions {
   display: flex;
   justify-content: space-between;
   padding: 25px 20px;
   align-items: center;
 }
-.card__button {
+.cards__button {
   padding: 0;
   border: none;
   margin: 0;
@@ -51,18 +51,18 @@
   transition: opacity 0.5s linear;
 }
 
-.card__button:hover {
+.cards__button:hover {
   opacity: 0.5;
 }
 
 @media screen and (max-width: 900px) {
-  .card__lists {
+  .cards__list {
     grid-template-columns: repeat(2, 282px);
     justify-content: center;
   }
 }
 @media screen and (max-width: 600px) {
-  .card__lists {
+  .cards__list {
     grid-template-columns: 282px;
   }
 }
