@@ -1,0 +1,113 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  /* justify-content: center;
+  align-items: center; */
+}
+.modal__container {
+  width: 430px;
+  height: 330px;
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 35px 0;
+  margin: auto;
+}
+
+.modal__close-tag {
+  background: url(../images/close-tag.svg) transparent no-repeat center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  padding: 0;
+}
+.modal__Edit-details {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.modal__edit-profile {
+  width: 358px;
+  height: 27px;
+  background: transparent;
+  margin: auto;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  margin-top: 54px;
+  padding: 0;
+  border-bottom-width: 1px;
+  border-color: rgba(0, 0, 0, 0.5);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0.8;
+}
+.modal__edit-profile::placeholder {
+  color: #000000;
+}
+.modal__edit-profile:last-of-type {
+  margin-top: 27px;
+}
+
+.modal__save-button {
+  width: 358px;
+  height: 50px;
+  margin: 48px auto 0;
+  box-sizing: border-box;
+  border: 0;
+  color: #ffffff;
+  background: #000000;
+  padding: 0;
+  border-radius: 2px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: 0em;
+}
+.modal__profile-heading {
+  margin: 0;
+  padding-left: 34px;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 0.8;
+  color: #000000;
+}
+@media screen and (max-width: 600px) {
+  .modal__container {
+    width: 282px;
+    height: 322px;
+  }
+  .modal__edit-profile {
+    width: 238px;
+  }
+  .modal__close-tag {
+    top: -45px;
+    right: 0;
+    width: 26px;
+    height: 26px;
+  }
+  .modal__save-button {
+    width: 238px;
+  }
+  .modal__profile-heading {
+    padding-left: 22px;
+  }
+}
