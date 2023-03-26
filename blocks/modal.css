@@ -31,6 +31,10 @@
   top: -36px;
   right: -36px;
   padding: 0;
+  cursor: pointer;
+}
+.modal__close-tag:hover {
+  opacity: 0.6;
 }
 .modal__Edit-details {
   box-sizing: border-box;
@@ -110,4 +114,7 @@
   .modal__profile-heading {
     padding-left: 22px;
   }
+}
+.modal_opened {
+  display: none;
 }
