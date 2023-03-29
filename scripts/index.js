@@ -24,34 +24,29 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-console.log(initialCards);
 
 const profileEditor = document.querySelector(".profile__editor");
 const modal = document.querySelector(".modal");
-
-profileEditor.addEventListener("click", function () {
-  modal.classList.remove("modal_opened");
-});
-
 const modalClosetag = modal.querySelector(".modal__close-tag");
-modalClosetag.addEventListener("click", function () {
-  modal.classList.add("modal_opened");
-});
-
-//modal name edit
 const profileFormElement = document.querySelector(".modal__Edit-details");
-
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
-
 const nameInput = profileFormElement.querySelector(
   ".modal__edit-profile_title"
 );
 const jobInput = profileFormElement.querySelector(
   ".modal__edit-profile_description"
 );
-//const modalDetails = document.querySelector(".modal__Edit-details");
+
 const saveButton = modal.querySelector(".modal__save-button");
+
+profileEditor.addEventListener("click", function () {
+  modal.classList.remove("modal_opened");
+});
+
+modalClosetag.addEventListener("click", function () {
+  modal.classList.add("modal_opened");
+});
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -60,3 +55,21 @@ function handleProfileFormSubmit(evt) {
   modal.classList.add("modal_opened");
 }
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+function getCardElement(data) {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate
+    .querySelector(".cards__content")
+    .cloneNode(true);
+
+  const cardsListElements = document.querySelector(".cards__list");
+  const cardsImage = cardElement.querySelector(".cards__image");
+  const cardsImageTitle = cardElement.querySelector(".cards__image-title");
+  cardsImageTitle.textContent = data.name;
+  cardsImage.src = data.link;
+  cardsImage.alt = data.name;
+  cardsListElements.append(cardElement);
+}
+for (let i = 0; i < initialCards.length; i++) {
+  getCardElement(initialCards[i]);
+}
