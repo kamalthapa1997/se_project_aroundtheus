@@ -69,6 +69,5 @@ function renderCard(data) {
   const cardElement = getCardElement(data);
   cardsListElements.prepend(cardElement);
 }
-for (let i = initialCards.length - 1; i >= 0; i--) {
-  renderCard(initialCards[i]);
-}
+
+initialCards.reverse().forEach(renderCard);
