@@ -26,50 +26,49 @@ const initialCards = [
 ];
 
 const profileEditor = document.querySelector(".profile__editor");
-const modal = document.querySelector(".modal");
-const modalClosetag = modal.querySelector(".modal__close-tag");
-const profileFormElement = document.querySelector(".modal__Edit-details");
+const profileModal = document.querySelector(".modal");
+const modalCloseTag = profileModal.querySelector(".modal__close-tag");
+const profileFormElement = profileModal.querySelector(".modal__form");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
-const nameInput = profileFormElement.querySelector(
-  ".modal__edit-profile_title"
-);
-const jobInput = profileFormElement.querySelector(
-  ".modal__edit-profile_description"
-);
-
-const saveButton = modal.querySelector(".modal__save-button");
+const nameInput = profileFormElement.querySelector("#modal-input-title");
+const jobInput = profileFormElement.querySelector("#modal-input-description");
+const saveButton = profileModal.querySelector(".modal__save-button");
+const cardTemplate = document.querySelector("#card-template").content;
+const cardsListElements = document.querySelector(".cards__list");
 
 profileEditor.addEventListener("click", function () {
-  modal.classList.remove("modal_opened");
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  profileModal.classList.add("modal__opened");
 });
-
-modalClosetag.addEventListener("click", function () {
-  modal.classList.add("modal_opened");
+modalCloseTag.addEventListener("click", function () {
+  profileModal.classList.remove("modal__opened");
 });
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  modal.classList.add("modal_opened");
+  profileModal.classList.remove("modal__opened");
 }
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 function getCardElement(data) {
-  const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
     .querySelector(".cards__content")
     .cloneNode(true);
-
-  const cardsListElements = document.querySelector(".cards__list");
   const cardsImage = cardElement.querySelector(".cards__image");
   const cardsImageTitle = cardElement.querySelector(".cards__image-title");
   cardsImageTitle.textContent = data.name;
   cardsImage.src = data.link;
   cardsImage.alt = data.name;
-  cardsListElements.append(cardElement);
+  return cardElement;
 }
-for (let i = 0; i < initialCards.length; i++) {
-  getCardElement(initialCards[i]);
+function renderCard(data) {
+  const cardElement = getCardElement(data);
+  cardsListElements.prepend(cardElement);
+}
+for (let i = initialCards.length - 1; i >= 0; i--) {
+  renderCard(initialCards[i]);
 }
