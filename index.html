@@ -37,11 +37,11 @@
       <footer class="footer">
         <p class="footer__address">&copy; 2022 Around The U.S</p>
       </footer>
-      <section class="modal">
+      <section class="modal" id="modal-edit-profile">
         <div class="modal__container">
           <button class="modal__close-tag"></button>
           <h2 class="modal__profile-heading">Edit profile</h2>
-          <form class="modal__form">
+          <form class="modal__form" id="modal-form">
             <input
               type="text"
               id="modal-input-title"
@@ -60,8 +60,40 @@
           </form>
         </div>
       </section>
+
+      <section class="modal" id="modal-add-profile">
+        <div class="modal__container">
+          <button class="modal__close-tag" id="modal-close-tag"></button>
+          <h2 class="modal__profile-heading">New place</h2>
+          <form class="modal__form" id="modal-add-form">
+            <input
+              type="text"
+              id="modal-input-title"
+              class="modal__input"
+              placeholder="title"
+              name="title"
+              required
+            />
+            <input
+              type="text"
+              id="modal-input-description"
+              class="modal__input"
+              placeholder="Image link"
+              name="link"
+              required
+            />
+            <button type="submit" class="modal__save-button">Save</button>
+          </form>
+        </div>
+      </section>
+
       <template id="card-template">
         <li class="cards__content">
+          <img
+            src="./images/delete.svg"
+            alt="Delete Button"
+            class="cards__delete-button"
+          />
           <img src="" alt="" class="cards__image" />
           <div class="cards__image-descriptions">
             <h2 class="cards__image-title"></h2>

@@ -16,6 +16,7 @@
   overflow: hidden;
   background-color: #eeeeee;
   list-style-type: none;
+  position: relative;
 }
 .cards__image {
   width: 282px;
@@ -43,16 +44,27 @@
   padding: 0;
   border: none;
   margin: 0;
-
-  cursor: pointer;
   background: url(../images/heart.svg) no-repeat center;
   min-width: 21px;
   height: 18px;
-  transition: opacity 0.5s linear;
 }
-
 .cards__button:hover {
-  opacity: 0.5;
+  opacity: 0.4;
+  cursor: pointer;
+}
+.cards__like-button {
+  background: url(../images/like.svg);
+}
+.cards__delete-button {
+  position: absolute;
+  margin: 0;
+  top: 18px;
+  right: 15px;
+  transition: 0.5s opacity;
+}
+.cards__delete-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 900px) {

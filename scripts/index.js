@@ -26,9 +26,9 @@ const initialCards = [
 ];
 
 const profileEditor = document.querySelector(".profile__editor");
-const profileModal = document.querySelector(".modal");
+const profileModal = document.querySelector("#modal-edit-profile");
 const modalCloseTag = profileModal.querySelector(".modal__close-tag");
-const profileFormElement = profileModal.querySelector(".modal__form");
+const profileFormElement = profileModal.querySelector("#modal-form");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 const nameInput = profileFormElement.querySelector("#modal-input-title");
@@ -60,9 +60,21 @@ function getCardElement(data) {
     .cloneNode(true);
   const cardsImage = cardElement.querySelector(".cards__image");
   const cardsImageTitle = cardElement.querySelector(".cards__image-title");
+
+  const likeButton = cardElement.querySelector(".cards__button");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("cards__like-button");
+  });
+
+  const deleteButton = cardElement.querySelector(".cards__delete-button");
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
   cardsImageTitle.textContent = data.name;
   cardsImage.src = data.link;
   cardsImage.alt = data.name;
+
   return cardElement;
 }
 function renderCard(data) {
@@ -71,3 +83,27 @@ function renderCard(data) {
 }
 
 initialCards.reverse().forEach(renderCard);
+
+const modalAddProfile = document.querySelector("#modal-add-profile");
+const profileAddEditor = document.querySelector(".profile__add-editor");
+const profileCloseEl = modalAddProfile.querySelector(".modal__close-tag");
+const modalAddForm = document.querySelector("#modal-add-form");
+
+profileAddEditor.addEventListener("click", function () {
+  modalAddProfile.classList.add("modal__opened");
+});
+
+profileCloseEl.addEventListener("click", () => {
+  modalAddProfile.classList.remove("modal__opened");
+});
+
+modalAddForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = e.target.title.value;
+  const link = e.target.link.value;
+  renderCard({
+    name: title,
+    link: link,
+  });
+  modalAddProfile.classList.remove("modal__opened");
+});
