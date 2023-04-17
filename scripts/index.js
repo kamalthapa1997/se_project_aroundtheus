@@ -91,7 +91,7 @@ function getCardElement(data) {
 
   return cardElement;
 }
-////
+
 function renderCard(data) {
   const cardElement = getCardElement(data);
   cardsListElements.prepend(cardElement);
