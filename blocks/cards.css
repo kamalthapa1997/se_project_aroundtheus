@@ -21,6 +21,12 @@
 .cards__image {
   width: 282px;
   height: 282px;
+
+  opacity: 1;
+}
+.cards__image-size {
+  max-width: 75vw;
+  max-height: 75vh;
 }
 
 .cards__image-title {
@@ -66,7 +72,35 @@
   opacity: 0.6;
   cursor: pointer;
 }
-
+.cards__fullscreen {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+.cards__image-fullscreen {
+  margin: auto;
+  position: relative;
+}
+.card__screen-size {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+.cards__title {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+  margin: 0;
+  padding-top: 10px;
+  box-sizing: border-box;
+  max-width: 291px;
+  max-height: 12px;
+}
 @media screen and (max-width: 900px) {
   .cards__list {
     grid-template-columns: repeat(2, 282px);

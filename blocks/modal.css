@@ -1,16 +1,21 @@
 .modal {
-  display: none;
+  /* display: flex; */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 2s, opacity 3s linear;
 }
 .modal__opened {
   display: flex;
+  visibility: visible;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
+  transition: opacity 1.1s linear;
+  opacity: 1;
 }
 
 .modal__container {

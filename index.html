@@ -68,7 +68,6 @@
           <form class="modal__form" id="modal-add-form">
             <input
               type="text"
-              id="modal-input-title"
               class="modal__input"
               placeholder="title"
               name="title"
@@ -76,7 +75,6 @@
             />
             <input
               type="text"
-              id="modal-input-description"
               class="modal__input"
               placeholder="Image link"
               name="link"
@@ -101,6 +99,14 @@
           </div>
         </li>
       </template>
+
+      <section class="modal" id="card-fullscreen">
+        <div class="cards__image-fullscreen">
+          <button class="modal__close-tag" id="card-close"></button>
+          <img class="cards__image-size" src="" alt="" />
+          <h2 class="cards__title"></h2>
+        </div>
+      </section>
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>

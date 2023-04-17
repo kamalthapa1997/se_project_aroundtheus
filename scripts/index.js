@@ -60,15 +60,29 @@ function getCardElement(data) {
     .cloneNode(true);
   const cardsImage = cardElement.querySelector(".cards__image");
   const cardsImageTitle = cardElement.querySelector(".cards__image-title");
-
   const likeButton = cardElement.querySelector(".cards__button");
+  const modalScreen = document.querySelector("#card-fullscreen");
+  const modalClose = document.querySelector("#card-close");
+  const imageSizeEl = document.querySelector(".cards__image-size");
+  const imageTitleEl = document.querySelector(".cards__title");
+  const deleteButton = cardElement.querySelector(".cards__delete-button");
+
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("cards__like-button");
   });
 
-  const deleteButton = cardElement.querySelector(".cards__delete-button");
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
+  });
+
+  cardsImage.addEventListener("click", () => {
+    modalScreen.classList.add("modal__opened");
+    imageSizeEl.src = data.link;
+    imageTitleEl.textContent = data.name;
+  });
+
+  modalClose.addEventListener("click", function () {
+    modalScreen.classList.remove("modal__opened");
   });
 
   cardsImageTitle.textContent = data.name;
@@ -77,6 +91,7 @@ function getCardElement(data) {
 
   return cardElement;
 }
+////
 function renderCard(data) {
   const cardElement = getCardElement(data);
   cardsListElements.prepend(cardElement);
