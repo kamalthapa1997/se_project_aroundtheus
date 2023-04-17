@@ -40,17 +40,17 @@ const cardsListElements = document.querySelector(".cards__list");
 profileEditor.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  profileModal.classList.add("modal__opened");
+  profileModal.classList.add("modal_opened");
 });
 modalCloseTag.addEventListener("click", function () {
-  profileModal.classList.remove("modal__opened");
+  profileModal.classList.remove("modal_opened");
 });
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  profileModal.classList.remove("modal__opened");
+  profileModal.classList.remove("modal_opened");
 }
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
@@ -76,13 +76,13 @@ function getCardElement(data) {
   });
 
   cardsImage.addEventListener("click", () => {
-    modalScreen.classList.add("modal__opened");
+    modalScreen.classList.add("modal_opened");
     imageSizeEl.src = data.link;
     imageTitleEl.textContent = data.name;
   });
 
   modalClose.addEventListener("click", function () {
-    modalScreen.classList.remove("modal__opened");
+    modalScreen.classList.remove("modal_opened");
   });
 
   cardsImageTitle.textContent = data.name;
@@ -105,11 +105,11 @@ const profileCloseEl = modalAddProfile.querySelector(".modal__close-tag");
 const modalAddForm = document.querySelector("#modal-add-form");
 
 profileAddEditor.addEventListener("click", function () {
-  modalAddProfile.classList.add("modal__opened");
+  modalAddProfile.classList.add("modal_opened");
 });
 
 profileCloseEl.addEventListener("click", () => {
-  modalAddProfile.classList.remove("modal__opened");
+  modalAddProfile.classList.remove("modal_opened");
 });
 
 modalAddForm.addEventListener("submit", (e) => {
@@ -120,5 +120,5 @@ modalAddForm.addEventListener("submit", (e) => {
     name: title,
     link: link,
   });
-  modalAddProfile.classList.remove("modal__opened");
+  modalAddProfile.classList.remove("modal_opened");
 });
