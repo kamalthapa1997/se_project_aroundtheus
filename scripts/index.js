@@ -37,15 +37,13 @@ const saveButton = profileModal.querySelector(".modal__save-button");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsListElements = document.querySelector(".cards__list");
 
-//// function popup
-
 function openPopup(popup) {
   popup.classList.add("modal_opened");
 }
 function closePopup(popup) {
   popup.classList.remove("modal_opened");
 }
-//////function popop
+
 profileEditor.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -61,7 +59,6 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(profileModal);
-  // profileModal.classList.remove("modal_opened");
 }
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
@@ -73,11 +70,6 @@ function getCardElement(data) {
   const cardsImageTitle = cardElement.querySelector(".cards__image-title");
   const likeButton = cardElement.querySelector(".cards__button");
 
-  /*
-    **Might be better**
-    It’s better to find **constants** only 1 time at the top of the file not to waste resources on searching them again and again when you call a method (function)
-
-  */
   const imageSizeEl = document.querySelector(".modal__image-size");
   const imageTitleEl = document.querySelector(".modal__image-title");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
@@ -122,11 +114,11 @@ const profileCloseEl = modalAddProfile.querySelector(".modal__close-tag");
 const modalAddForm = document.querySelector("#modal-add-form");
 
 profileAddEditor.addEventListener("click", function () {
-  modalAddProfile.classList.add("modal_opened");
+  openPopup(modalAddProfile);
 });
 
 profileCloseEl.addEventListener("click", () => {
-  modalAddProfile.classList.remove("modal_opened");
+  closePopup(modalAddProfile);
 });
 
 function handleImageSubmit(evt) {
