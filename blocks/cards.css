@@ -21,7 +21,6 @@
 .cards__image {
   width: 282px;
   height: 282px;
-
   opacity: 1;
 }
 .cards__image-size {
@@ -81,15 +80,15 @@
   background: rgba(0, 0, 0, 0.5);
   display: flex;
 }
-.cards__image-fullscreen {
+.modal__image-container {
   margin: auto;
   position: relative;
 }
-.card__screen-size {
+.modal__image-size {
   max-width: 75vw;
   max-height: 75vh;
 }
-.cards__title {
+.modal__image-title {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;

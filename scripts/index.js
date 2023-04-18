@@ -37,20 +37,31 @@ const saveButton = profileModal.querySelector(".modal__save-button");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsListElements = document.querySelector(".cards__list");
 
+//// function popup
+
+function openPopup(popup) {
+  popup.classList.add("modal_opened");
+}
+function closePopup(popup) {
+  popup.classList.remove("modal_opened");
+}
+//////function popop
 profileEditor.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  profileModal.classList.add("modal_opened");
+
+  openPopup(profileModal);
 });
 modalCloseTag.addEventListener("click", function () {
-  profileModal.classList.remove("modal_opened");
+  closePopup(profileModal);
 });
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  profileModal.classList.remove("modal_opened");
+  closePopup(profileModal);
+  // profileModal.classList.remove("modal_opened");
 }
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
@@ -61,10 +72,14 @@ function getCardElement(data) {
   const cardsImage = cardElement.querySelector(".cards__image");
   const cardsImageTitle = cardElement.querySelector(".cards__image-title");
   const likeButton = cardElement.querySelector(".cards__button");
-  const modalScreen = document.querySelector("#card-fullscreen");
-  const modalClose = document.querySelector("#card-close");
-  const imageSizeEl = document.querySelector(".cards__image-size");
-  const imageTitleEl = document.querySelector(".cards__title");
+
+  /*
+    **Might be better**
+    It’s better to find **constants** only 1 time at the top of the file not to waste resources on searching them again and again when you call a method (function)
+
+  */
+  const imageSizeEl = document.querySelector(".modal__image-size");
+  const imageTitleEl = document.querySelector(".modal__image-title");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
 
   likeButton.addEventListener("click", () => {
@@ -78,11 +93,8 @@ function getCardElement(data) {
   cardsImage.addEventListener("click", () => {
     modalScreen.classList.add("modal_opened");
     imageSizeEl.src = data.link;
+    imageSizeEl.alt = data.name;
     imageTitleEl.textContent = data.name;
-  });
-
-  modalClose.addEventListener("click", function () {
-    modalScreen.classList.remove("modal_opened");
   });
 
   cardsImageTitle.textContent = data.name;
@@ -91,6 +103,11 @@ function getCardElement(data) {
 
   return cardElement;
 }
+const modalScreen = document.querySelector("#card-fullscreen");
+const modalClose = document.querySelector("#card-close");
+modalClose.addEventListener("click", () => {
+  closePopup(modalScreen);
+});
 
 function renderCard(data) {
   const cardElement = getCardElement(data);
@@ -112,13 +129,15 @@ profileCloseEl.addEventListener("click", () => {
   modalAddProfile.classList.remove("modal_opened");
 });
 
-modalAddForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const title = e.target.title.value;
-  const link = e.target.link.value;
+function handleImageSubmit(evt) {
+  evt.preventDefault();
+  const title = evt.target.title.value;
+  const link = evt.target.link.value;
   renderCard({
     name: title,
     link: link,
   });
-  modalAddProfile.classList.remove("modal_opened");
-});
+  closePopup(modalAddProfile);
+  modalAddForm.reset();
+}
+modalAddForm.addEventListener("submit", handleImageSubmit);
