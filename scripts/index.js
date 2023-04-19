@@ -27,7 +27,7 @@ const initialCards = [
 
 const profileEditor = document.querySelector(".profile__editor");
 const profileModal = document.querySelector("#modal-edit-profile");
-const modalCloseTag = profileModal.querySelector(".modal__close-tag");
+const porfileModalCloseButton = profileModal.querySelector(".modal__close-tag");
 const profileFormElement = profileModal.querySelector("#modal-form");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
@@ -50,7 +50,7 @@ profileEditor.addEventListener("click", function () {
 
   openPopup(profileModal);
 });
-modalCloseTag.addEventListener("click", function () {
+porfileModalCloseButton.addEventListener("click", function () {
   closePopup(profileModal);
 });
 
@@ -83,7 +83,8 @@ function getCardElement(data) {
   });
 
   cardsImage.addEventListener("click", () => {
-    modalScreen.classList.add("modal_opened");
+    openPopup(modalCardScreenSize);
+    // modalScreen.classList.add("modal_opened");
     imageSizeEl.src = data.link;
     imageSizeEl.alt = data.name;
     imageTitleEl.textContent = data.name;
@@ -96,10 +97,10 @@ function getCardElement(data) {
   return cardElement;
 }
 
-const modalScreen = document.querySelector("#card-fullscreen");
-const modalClose = document.querySelector("#card-close");
-modalClose.addEventListener("click", () => {
-  closePopup(modalScreen);
+const modalCardScreenSize = document.querySelector("#card-fullscreen");
+const modalCardCloseButton = document.querySelector("#card-close-button");
+modalCardCloseButton.addEventListener("click", () => {
+  closePopup(modalCardScreenSize);
 });
 
 function renderCard(data) {
