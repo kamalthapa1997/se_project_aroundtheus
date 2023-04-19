@@ -95,6 +95,7 @@ function getCardElement(data) {
 
   return cardElement;
 }
+
 const modalScreen = document.querySelector("#card-fullscreen");
 const modalClose = document.querySelector("#card-close");
 modalClose.addEventListener("click", () => {
