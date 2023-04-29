@@ -1,7 +1,6 @@
 # Around The U.S.
 
-https://kamalthapa1997.github.io/se_project_aroundtheus/
-This is the third project of the Software Engineer program at Practicum by Yandex. It was created using HTML and CSS, based on the design brief.
+This is the sixth sprint project of the Software Engineer program at Practicum by Yandex. It was created using HTML and CSS and JavaScript based on the design brief.
 
 ## Project features
 
@@ -11,9 +10,15 @@ This is the third project of the Software Engineer program at Practicum by Yande
 - Flat BEM
 - Grid
 - Media query(Mobile, Tablet, Desktop)
+- JavaScript 
 
 ## Plan on improving the project
 
 The purpose of this project is to create a responsive website that functions properly on mobile devices, tablets and a standard desktop
 or laptop computer. The webiste was developed using a grid and flexbox. The website is design to allow for users to share pictures of
 their favorite destinations around the United States, while allowing other users to like and comment on these pictures.
+
+Link to my project =>   https://kamalthapa1997.github.io/se_project_aroundtheus/
+
+## PracticumUSA
+
