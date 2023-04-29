@@ -27,9 +27,7 @@
   padding: 35px 36px;
   margin: auto;
 }
-.modal__form {
-  overflow: hidden;
-}
+
 .modal__close-tag {
   background: url(../images/close-tag.svg) transparent no-repeat center;
   width: 40px;
@@ -51,6 +49,7 @@
   margin: 0;
   padding: 0;
   border: none;
+  overflow: hidden;
 }
 .modal__input {
   width: 100%;
