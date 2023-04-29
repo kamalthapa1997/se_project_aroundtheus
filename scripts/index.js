@@ -1,15 +1,15 @@
 const initialCards = [
   {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+    name: "Bouddha Nath",
+    link: "https://images.unsplash.com/photo-1592285896110-8d88b5b3a5d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG5lcGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+    name: "Patan Durbar Square",
+    link: "https://images.unsplash.com/photo-1550642249-6e5605421172?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bmVwYWx8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
   },
   {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+    name: "Namche Valley",
+    link: "https://images.unsplash.com/photo-1511215579272-6192432f83bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHw4NjgwOTE5fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=600&q=60",
   },
   {
     name: "Latemar",
@@ -84,7 +84,6 @@ function getCardElement(data) {
 
   cardsImage.addEventListener("click", () => {
     openPopup(modalCardScreenSize);
-    // modalScreen.classList.add("modal_opened");
     imageSizeEl.src = data.link;
     imageSizeEl.alt = data.name;
     imageTitleEl.textContent = data.name;
@@ -135,3 +134,12 @@ function handleImageSubmit(evt) {
   modalAddForm.reset();
 }
 modalAddForm.addEventListener("submit", handleImageSubmit);
+
+function modalPupop(modalElement) {
+  modalElement.addEventListener("mousedown", (evt) => {
+    if (evt.target === evt.currentTarget) closePopup(modalElement);
+  });
+}
+modalPupop(profileModal);
+modalPupop(modalAddProfile);
+modalPupop(modalCardScreenSize);
