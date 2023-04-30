@@ -33,7 +33,7 @@ const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 const nameInput = profileFormElement.querySelector("#modal-input-title");
 const jobInput = profileFormElement.querySelector("#modal-input-description");
-const saveButton = profileModal.querySelector(".modal__save-button");
+const saveButton = profileModal.querySelector(".modal__button");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsListElements = document.querySelector(".cards__list");
 const modalContainerEl = document.querySelector(".modal__container");
@@ -75,7 +75,6 @@ function getCardElement(data) {
   const cardsImage = cardElement.querySelector(".cards__image");
   const cardsImageTitle = cardElement.querySelector(".cards__image-title");
   const likeButton = cardElement.querySelector(".cards__button");
-
   const imageSizeEl = document.querySelector(".modal__image-size");
   const imageTitleEl = document.querySelector(".modal__image-title");
   const deleteButton = cardElement.querySelector(".cards__delete-button");
@@ -124,12 +123,7 @@ profileCloseEl.addEventListener("click", () => {
   closePopup(modalAddProfile);
 });
 
-////////  toggleButtonState
-
 function handleImageSubmit(evt) {
-  const { inactiveButtonClass } = config;
-  const buttonElement = document.querySelector(".modal__button");
-
   evt.preventDefault();
   const title = evt.target.title.value;
   const link = evt.target.link.value;
@@ -139,10 +133,11 @@ function handleImageSubmit(evt) {
   });
   closePopup(modalAddProfile);
   modalAddForm.reset();
-  /////// THIS ONE //////
-  toggleButtonState([evt.target.title, evt.target.link], buttonElement, {
-    inactiveButtonClass,
-  });
+  toggleButtonState(
+    Array.from(modalAddForm.querySelectorAll(config.inputSelector)),
+    modalAddForm.querySelector(config.submitButtonSelector),
+    config
+  );
 }
 modalAddForm.addEventListener("submit", handleImageSubmit);
 
