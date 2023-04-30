@@ -36,12 +36,18 @@ const jobInput = profileFormElement.querySelector("#modal-input-description");
 const saveButton = profileModal.querySelector(".modal__save-button");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsListElements = document.querySelector(".cards__list");
-
+const modalContainerEl = document.querySelector(".modal__container");
+const modalAddProfile = document.querySelector("#modal-add-profile");
+const profileAddEditor = document.querySelector(".profile__add-editor");
+const profileCloseEl = modalAddProfile.querySelector(".modal__close-tag");
+const modalAddForm = document.querySelector("#modal-add-form");
 function openPopup(popup) {
   popup.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscKeyDown);
 }
 function closePopup(popup) {
   popup.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscKeyDown);
 }
 
 profileEditor.addEventListener("click", function () {
@@ -98,6 +104,7 @@ function getCardElement(data) {
 
 const modalCardScreenSize = document.querySelector("#card-fullscreen");
 const modalCardCloseButton = document.querySelector("#card-close-button");
+
 modalCardCloseButton.addEventListener("click", () => {
   closePopup(modalCardScreenSize);
 });
@@ -109,11 +116,6 @@ function renderCard(data) {
 
 initialCards.reverse().forEach(renderCard);
 
-const modalAddProfile = document.querySelector("#modal-add-profile");
-const profileAddEditor = document.querySelector(".profile__add-editor");
-const profileCloseEl = modalAddProfile.querySelector(".modal__close-tag");
-const modalAddForm = document.querySelector("#modal-add-form");
-
 profileAddEditor.addEventListener("click", function () {
   openPopup(modalAddProfile);
 });
@@ -122,7 +124,12 @@ profileCloseEl.addEventListener("click", () => {
   closePopup(modalAddProfile);
 });
 
+////////  toggleButtonState
+
 function handleImageSubmit(evt) {
+  const { inactiveButtonClass } = config;
+  const buttonElement = document.querySelector(".modal__button");
+
   evt.preventDefault();
   const title = evt.target.title.value;
   const link = evt.target.link.value;
@@ -132,14 +139,27 @@ function handleImageSubmit(evt) {
   });
   closePopup(modalAddProfile);
   modalAddForm.reset();
+  /////// THIS ONE //////
+  toggleButtonState([evt.target.title, evt.target.link], buttonElement, {
+    inactiveButtonClass,
+  });
 }
 modalAddForm.addEventListener("submit", handleImageSubmit);
 
-function modalPupop(modalElement) {
+function addModalOutsideClickListener(modalElement) {
   modalElement.addEventListener("mousedown", (evt) => {
     if (evt.target === evt.currentTarget) closePopup(modalElement);
   });
 }
-modalPupop(profileModal);
-modalPupop(modalAddProfile);
-modalPupop(modalCardScreenSize);
+addModalOutsideClickListener(profileModal);
+addModalOutsideClickListener(modalAddProfile);
+addModalOutsideClickListener(modalCardScreenSize);
+
+const openedModal = document.querySelector(".modal_opened");
+console.log(openedModal);
+const handleEscKeyDown = function (e) {
+  if (e.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closePopup(openedModal);
+  }
+};
