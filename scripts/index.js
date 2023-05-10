@@ -1,3 +1,6 @@
+//import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Bouddha Nath",
@@ -25,22 +28,46 @@ const initialCards = [
   },
 ];
 
-const profileEditor = document.querySelector(".profile__editor");
+/////------  FORM-VALIDATION ------//////
 const profileModal = document.querySelector("#modal-edit-profile");
+const modalAddProfile = document.querySelector("#modal-add-profile");
+
+const editFormElement = profileModal.querySelector(".modal__form");
+
+const addFormElement = modalAddProfile.querySelector(".modal__form");
+
+////
+
+const profileEditor = document.querySelector(".profile__editor");
 const porfileModalCloseButton = profileModal.querySelector(".modal__close-tag");
-const profileFormElement = profileModal.querySelector("#modal-form");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
-const nameInput = profileFormElement.querySelector("#modal-input-title");
-const jobInput = profileFormElement.querySelector("#modal-input-description");
+const nameInput = editFormElement.querySelector("#modal-input-title");
+const jobInput = editFormElement.querySelector("#modal-input-description");
 const saveButton = profileModal.querySelector(".modal__button");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsListElements = document.querySelector(".cards__list");
 const modalContainerEl = document.querySelector(".modal__container");
-const modalAddProfile = document.querySelector("#modal-add-profile");
 const profileAddEditor = document.querySelector(".profile__add-editor");
 const profileCloseEl = modalAddProfile.querySelector(".modal__close-tag");
-const modalAddForm = document.querySelector("#modal-add-form");
+
+/////------  FORM-VALIDATION ------//////
+const config = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormValidator = new FormValidator(config, editFormElement);
+const addFormValidator = new FormValidator(config, addFormElement);
+
+addFormValidator.enableValidation();
+editFormValidator.enableValidation();
+
+///--FUNCTIONS ---///
+
 function openPopup(popup) {
   popup.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscKeyDown);
@@ -49,6 +76,14 @@ function closePopup(popup) {
   popup.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscKeyDown);
 }
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup(profileModal);
+}
+
+//////
 
 profileEditor.addEventListener("click", function () {
   nameInput.value = profileName.textContent;
@@ -60,13 +95,7 @@ porfileModalCloseButton.addEventListener("click", function () {
   closePopup(profileModal);
 });
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(profileModal);
-}
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+editFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 function getCardElement(data) {
   const cardElement = cardTemplate
@@ -132,14 +161,14 @@ function handleImageSubmit(evt) {
     link: link,
   });
   closePopup(modalAddProfile);
-  modalAddForm.reset();
+  addFormElement.reset();
   toggleButtonState(
-    Array.from(modalAddForm.querySelectorAll(config.inputSelector)),
-    modalAddForm.querySelector(config.submitButtonSelector),
+    Array.from(addFormElement.querySelectorAll(config.inputSelector)),
+    addFormElement.querySelector(config.submitButtonSelector),
     config
   );
 }
-modalAddForm.addEventListener("submit", handleImageSubmit);
+addFormElement.addEventListener("submit", handleImageSubmit);
 
 function addModalOutsideClickListener(modalElement) {
   modalElement.addEventListener("mousedown", (evt) => {
@@ -151,7 +180,7 @@ addModalOutsideClickListener(modalAddProfile);
 addModalOutsideClickListener(modalCardScreenSize);
 
 const openedModal = document.querySelector(".modal_opened");
-console.log(openedModal);
+
 const handleEscKeyDown = function (e) {
   if (e.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
