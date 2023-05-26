@@ -23,9 +23,4 @@ export default class PopupWithImage extends Popup {
     this._popupImage.src = "";
     super.close();
   }
-  // setEventListeners() {
-  //   this._popupElement
-  //     .querySelector("#card-close-button")
-  //     .addEventListeners("click", this.close);
-  // }
 }

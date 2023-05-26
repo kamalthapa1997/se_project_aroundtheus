@@ -1,7 +1,6 @@
 import "../pages/index.css";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-
 import Section from "../components/Section.js";
 import {
   Selector,
@@ -15,6 +14,7 @@ import {
 } from "../utils/Consants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 /// ---Form Validation---////
 const editFormValidator = new FormValidator(config, editFormElement);
@@ -68,6 +68,20 @@ const profilePopup = new PopupWithForm({
     profilePopup.close();
   },
 });
+
+// function fillProfileForm() {
+//   debugger;
+//   const userData = userInfo.getUserInfo();
+//   profileName.value = userData.name;
+//   profileJob.value = userData.title;
+// }
+
+// function handleProfileEditSubmit(data) {
+//   userInfo.setUserInfo(data);
+//   profilePopup.close();
+// }
+
+//event listeners
 
 profileEditor.addEventListener("click", () => {
   profilePopup.open();
