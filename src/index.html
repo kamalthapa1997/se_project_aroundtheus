@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Around The US" />
+    <meta name="author" content="Kamal Thapa" />
+    <meta name="keywords" content="HTML, CSS" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <title>Around The US</title>
+  </head>
+  <body class="page">
+    <div class="page__content">
+      <header class="header">
+        <img
+          src="<%= require('./images/logo.svg')%>"
+          alt="Around The US logo"
+          class="logo"
+        />
+      </header>
+      <main class="main">
+        <section class="profile">
+          <img
+            src=" <%= require('./images/jacques-cousteau.jpg')%>"
+            alt="Jacques Cousteau"
+            class="profile__image"
+          />
+          <div class="profile__informations">
+            <h1 class="profile__title">Jacques Cousteau</h1>
+            <button type="button" class="profile__editor"></button>
+            <p class="profile__subtitle">Explorer</p>
+          </div>
+          <button type="button" class="profile__add-editor"></button>
+        </section>
+
+        <section class="cards">
+          <ul class="cards__list"></ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__address">&copy; 2022 Around The U.S</p>
+      </footer>
+      <section class="modal" id="modal-edit-profile">
+        <div class="modal__container">
+          <button class="modal__close-tag"></button>
+          <h2 class="modal__profile-heading">Edit profile</h2>
+
+          <form class="modal__form" id="modal-edit-form" novalidate>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="modal-input-title"
+                class="modal__input"
+                placeholder="Name"
+                required
+                minlength="2"
+                maxlength="40"
+              />
+              <span class="modal-error modal-input-title-error"></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="modal-input-description"
+                class="modal__input"
+                placeholder="About"
+                required
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="modal-error modal-input-description-error"></span>
+            </label>
+
+            <button type="submit" class="modal__button">Save</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="modal" id="modal-add-profile">
+        <div class="modal__container">
+          <button class="modal__close-tag" id="modal-close-tag"></button>
+          <h2 class="modal__profile-heading">New place</h2>
+          <form class="modal__form" id="modal-add-form">
+            <label class="modal__label">
+              <input
+                type="text"
+                class="modal__input"
+                id="place-title"
+                placeholder="title"
+                name="title"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span class="modal-error place-title-error"></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="url"
+                class="modal__input"
+                id="place-link"
+                placeholder="Image link"
+                name="link"
+                required
+              />
+            </label>
+            <span class="modal-error place-link-error"></span>
+
+            <button type="submit" class="modal__button">Save</button>
+          </form>
+        </div>
+      </section>
+
+      <template id="card-template">
+        <li class="cards__content">
+          <img
+            src="<%= require('./images/delete.svg')%>"
+            alt="Delete Button"
+            class="cards__delete-button"
+          />
+          <img src="" alt="" class="cards__image" />
+          <div class="cards__image-descriptions">
+            <h2 class="cards__image-title"></h2>
+            <button type="button" class="cards__button"></button>
+          </div>
+        </li>
+      </template>
+
+      <section class="modal" id="card-fullscreen">
+        <div class="modal__image-container">
+          <button class="modal__close-tag" id="card-close-button"></button>
+
+          <img class="modal__image-size" src="#" alt="" />
+
+          <h2 class="modal__image-title"></h2>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
