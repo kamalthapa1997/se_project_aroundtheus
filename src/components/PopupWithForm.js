@@ -40,8 +40,5 @@ export default class PopupWithForm extends Popup {
       .addEventListener("click", () => {
         this.open();
       });
-    document.querySelector("#modal-close-tag").addEventListener("click", () => {
-      this.close();
-    });
   }
 }
