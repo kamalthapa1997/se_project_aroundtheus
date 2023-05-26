@@ -41,16 +41,17 @@
       <footer class="footer">
         <p class="footer__address">&copy; 2022 Around The U.S</p>
       </footer>
-      <section class="modal" id="modal-edit-profile">
+      <section  class="modal" id="modal-edit-profile">
         <div class="modal__container">
-          <button class="modal__close-tag"></button>
+          <button class="modal__close-tag" id="modal-close-tag"></button>
           <h2 class="modal__profile-heading">Edit profile</h2>
 
           <form class="modal__form" id="modal-edit-form" novalidate>
             <label class="modal__label">
               <input
                 type="text"
-                id="modal-input-title"
+                id="modal-input-title" 
+                name="name"
                 class="modal__input"
                 placeholder="Name"
                 required
@@ -63,6 +64,7 @@
               <input
                 type="text"
                 id="modal-input-description"
+                 name="title"
                 class="modal__input"
                 placeholder="About"
                 required
@@ -119,23 +121,23 @@
             alt="Delete Button"
             class="cards__delete-button"
           />
-          <img src="" alt="" class="cards__image" />
+          <img src="#" alt="" class="cards__image" />
           <div class="cards__image-descriptions">
             <h2 class="cards__image-title"></h2>
             <button type="button" class="cards__button"></button>
           </div>
         </li>
       </template>
-
+     
       <section class="modal" id="card-fullscreen">
         <div class="modal__image-container">
-          <button class="modal__close-tag" id="card-close-button"></button>
+          <button class="modal__close-tag" id="modal-close-tag"></button>
 
           <img class="modal__image-size" src="#" alt="" />
 
           <h2 class="modal__image-title"></h2>
         </div>
-      </section>
+      </sectiseton>
     </div>
   </body>
 </html>

@@ -1,12 +1,10 @@
-import { openPopup, closePopup, handleEscKeyDown } from "../utils/utils.js";
+// import { openPopup, closePopup, handleEscKeyDown } from "../utils/utils.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
-const modalCardScreenSize = document.querySelector("#card-fullscreen");
-const imageSizeEl = document.querySelector(".modal__image-size");
-const imageTitleEl = document.querySelector(".modal__image-title");
-
+import { modalCardCloseButton } from "../utils/Consants.js";
 export default class Card {
   constructor(data, cardSelector) {
-    this._name = data.name;
+    this._name = data.title;
     this._link = data.link;
     this._cardSelector = cardSelector;
   }
@@ -29,7 +27,13 @@ export default class Card {
       .querySelector(".cards__delete-button")
       .addEventListener("click", this._handleDeleteIcon.bind(this));
 
-    this._cardsImage.addEventListener("click", () => this._handlePreViewIcon());
+    const imagePopup = new PopupWithImage(
+      { name: this._name, link: this._link },
+      "#card-fullscreen"
+    );
+    this._cardsImage.addEventListener("click", () => {
+      imagePopup.open();
+    });
   }
 
   _handleLikeIcon() {
@@ -40,12 +44,6 @@ export default class Card {
     this._element.remove();
   }
 
-  _handlePreViewIcon() {
-    openPopup(modalCardScreenSize);
-    imageSizeEl.src = this._link;
-    imageSizeEl.alt = this._name;
-    imageTitleEl.textContent = this._name;
-  }
   generateCard() {
     this._element = this._getTemplate();
     this._cardsButtonForLike = this._element.querySelector(".cards__button");

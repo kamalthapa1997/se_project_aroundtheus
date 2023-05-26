@@ -50,6 +50,11 @@ class FormValidator {
     this._buttonElement.disabled = false;
   }
 
+  resetButton() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
+  }
+
   _setEventListener() {
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
