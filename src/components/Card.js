@@ -1,12 +1,9 @@
-// import { openPopup, closePopup, handleEscKeyDown } from "../utils/utils.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-
-import { modalCardCloseButton } from "../utils/Consants.js";
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.title;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -27,12 +24,8 @@ export default class Card {
       .querySelector(".cards__delete-button")
       .addEventListener("click", this._handleDeleteIcon.bind(this));
 
-    const imagePopup = new PopupWithImage(
-      { name: this._name, link: this._link },
-      "#card-fullscreen"
-    );
     this._cardsImage.addEventListener("click", () => {
-      imagePopup.open();
+      this._handleCardClick({ name: this._name, link: this._link });
     });
   }
 

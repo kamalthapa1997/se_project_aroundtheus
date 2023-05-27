@@ -7,10 +7,11 @@ import {
   initialCards,
   profileName,
   profileJob,
-  profileEditor,
+  profileInfoEditor,
   config,
   editFormElement,
   addFormElement,
+  profileAddImageEditor,
 } from "../utils/Consants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
@@ -26,13 +27,21 @@ editFormValidator.enableValidation();
 ///  Create intances of classes
 
 const render = (data) => {
-  const cardEl = new Card(data, "#card-template");
+  const cardEl = new Card(data, "#card-template", handleCardClick);
   const cardElement = cardEl.generateCard();
 
   cardSection.addItems(cardElement);
 };
 
-//// -----SECTION
+////////////--------------popupWithImage
+
+const handleCardClick = ({ name, link }) => {
+  const imagePopup = new PopupWithImage({ popupSelector: "#card-fullscreen" });
+  imagePopup.setEventListeners();
+  imagePopup.open({ name, link });
+};
+
+//// ----- intances of SECTION class
 const cardSection = new Section(
   {
     data: initialCards,
@@ -43,46 +52,39 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-////-- Popup With Form -----////
+////----- Popup With Form -----////
 
 const newCardPupup = new PopupWithForm({
   popupSelector: "#modal-add-profile",
   handleAddCardSubmit: (inputValues) => {
     render(inputValues);
-    addFormValidator.toggleButtonState();
-    addFormValidator.resetButton();
     newCardPupup.close();
   },
 });
 newCardPupup.setEventListeners();
 
-///  intences of userInfo class
+///------  intences of userInfo class
 
 const userInfo = new UserInfo(".profile__title", ".profile__subtitle");
 const profilePopup = new PopupWithForm({
   popupSelector: "#modal-edit-profile",
   handleAddCardSubmit: (data) => {
     userInfo.setUserInfo(data);
-    editFormValidator.toggleButtonState();
-    editFormValidator.resetButton();
     profilePopup.close();
   },
 });
+profilePopup.setEventListeners();
 
-// function fillProfileForm() {
-//   debugger;
-//   const userData = userInfo.getUserInfo();
-//   profileName.value = userData.name;
-//   profileJob.value = userData.title;
-// }
+///////---------event listeners
 
-// function handleProfileEditSubmit(data) {
-//   userInfo.setUserInfo(data);
-//   profilePopup.close();
-// }
-
-//event listeners
-
-profileEditor.addEventListener("click", () => {
+profileInfoEditor.addEventListener("click", () => {
+  const userData = userInfo.getUserInfo();
+  profileName.value = userData.name;
+  profileJob.value = userData.title;
+  editFormValidator.toggleButtonState();
   profilePopup.open();
+});
+profileAddImageEditor.addEventListener("click", () => {
+  addFormValidator.toggleButtonState();
+  newCardPupup.open();
 });

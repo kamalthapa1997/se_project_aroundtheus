@@ -1,4 +1,5 @@
-import Popup from "./popup.js";
+import Popup from "./Popup.js";
+// import FormValidator from "./FormValidator.js";
 
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, handleAddCardSubmit }) {
@@ -19,26 +20,34 @@ export default class PopupWithForm extends Popup {
     return inputData;
   }
 
-  open() {
-    this._formElement.addEventListener("submit", this._handleSubmit);
-    super.open();
-  }
+  // open() {
+  //   // this._formElement.addEventListener("submit", this._handleSubmit);
+  //   super.open();
+  // }
   close() {
-    super.close();
+    // console.log("close");
     this._formElement.reset();
+    super.close();
   }
   _handleSubmit = (e) => {
     e.preventDefault();
     this._handleAddCardSubmit(this._getInputValue());
-    this._formElement.reset();
+    // this._formElement.reset();
     this.close();
   };
 
   setEventListeners() {
-    document
-      .querySelector(".profile__add-editor")
-      .addEventListener("click", () => {
-        this.open();
-      });
+    super.setEventListeners();
+    this._formElement.addEventListener("submit", this._handleSubmit);
+    // this._formElement.addEventListener("submit", () => {
+    //   this._handleSubmit;
+    //   console.log("clicked");
+    // });
+
+    // document
+    //   .querySelector(".profile__add-editor")
+    //   .addEventListener("click", () => {
+    //     this.open();
+    //   });
   }
 }

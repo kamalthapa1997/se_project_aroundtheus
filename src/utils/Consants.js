@@ -36,13 +36,15 @@ export const profileName = editFormElement.querySelector("#modal-input-title");
 export const profileJob = editFormElement.querySelector(
   "#modal-input-description"
 );
-export const profileEditor = document.querySelector(".profile__editor");
+export const profileInfoEditor = document.querySelector(".profile__editor");
 export const modalCardCloseButton =
   document.querySelector("#card-close-button");
 
 export const modalAddProfile = document.querySelector("#modal-add-profile");
 export const addFormElement = modalAddProfile.querySelector(".modal__form");
-
+export const profileAddImageEditor = document.querySelector(
+  ".profile__add-editor"
+);
 export const config = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",

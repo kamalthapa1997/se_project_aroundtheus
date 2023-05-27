@@ -1,5 +1,3 @@
-// import { openPopup, closePopup, handleEscKeyDown } from "../utils/utils.js";
-
 export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
@@ -11,21 +9,8 @@ export default class Popup {
   open() {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
-    const popupCloseTag = this._popupElement.querySelector(".modal__close-tag");
-
-    popupCloseTag.addEventListener("click", this._handleOutsideClickListener);
-
-    this._popupElement.addEventListener(
-      "mousedown",
-      this._handleOutsideClickListener
-    );
   }
   close() {
-    document.removeEventListener("keydown", this._handleEscClose);
-    this._popupElement.removeEventListener(
-      "mousedown",
-      this._handleOutsideClickListener
-    );
     this._popupElement.classList.remove("modal_opened");
   }
   _handleEscClose = (evt) => {
@@ -44,5 +29,13 @@ export default class Popup {
     ) {
       this.close();
     }
+  }
+  setEventListeners() {
+    const popupCloseTag = this._popupElement.querySelector(".modal__close-tag");
+    this._popupElement.addEventListener(
+      "mousedown",
+      this._handleOutsideClickListener
+    );
+    popupCloseTag.addEventListener("click", this._handleOutsideClickListener);
   }
 }

@@ -9,7 +9,6 @@ export default class Section {
     this._renderedItems.forEach((item) => this._renderer(item));
   }
   addItems(cardElement) {
-    // console.log(cardElement);
     this._container.prepend(cardElement);
   }
 }
