@@ -27,19 +27,17 @@ editFormValidator.enableValidation();
 ///  Create intances of classes
 
 const render = (data) => {
-  const cardEl = new Card(data, "#card-template", handleCardClick);
+  const cardEl = new Card(data, "#card-template", ({ name, link }) => {
+    imagePopup.open({ name, link });
+  });
   const cardElement = cardEl.generateCard();
-
   cardSection.addItems(cardElement);
 };
 
 ////////////--------------popupWithImage
 
-const handleCardClick = ({ name, link }) => {
-  const imagePopup = new PopupWithImage({ popupSelector: "#card-fullscreen" });
-  imagePopup.setEventListeners();
-  imagePopup.open({ name, link });
-};
+const imagePopup = new PopupWithImage({ popupSelector: "#card-fullscreen" });
+imagePopup.setEventListeners();
 
 //// ----- intances of SECTION class
 const cardSection = new Section(
@@ -56,7 +54,7 @@ cardSection.renderItems();
 
 const newCardPupup = new PopupWithForm({
   popupSelector: "#modal-add-profile",
-  handleAddCardSubmit: (inputValues) => {
+  handleSubmit: (inputValues) => {
     render(inputValues);
     newCardPupup.close();
   },
@@ -68,7 +66,7 @@ newCardPupup.setEventListeners();
 const userInfo = new UserInfo(".profile__title", ".profile__subtitle");
 const profilePopup = new PopupWithForm({
   popupSelector: "#modal-edit-profile",
-  handleAddCardSubmit: (data) => {
+  handleSubmit: (data) => {
     userInfo.setUserInfo(data);
     profilePopup.close();
   },
