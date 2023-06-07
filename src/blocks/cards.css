@@ -43,7 +43,7 @@
 .cards__image-descriptions {
   display: flex;
   justify-content: space-between;
-  padding: 25px 20px;
+  padding: 22px 20px 9px;
   align-items: center;
 }
 .cards__button {
@@ -101,6 +101,12 @@
   max-width: 291px;
   max-height: 12px;
 }
+.cards__like-count {
+  margin: 0;
+  color: #000000;
+  text-align: center;
+}
+
 @media screen and (max-width: 900px) {
   .cards__list {
     grid-template-columns: repeat(2, 282px);

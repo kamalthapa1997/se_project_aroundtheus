@@ -1,9 +1,24 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick) {
-    this._name = data.title;
+  constructor(
+    { data, handleCardClick, handleCardDlt },
+    cardSelector,
+    cardLikeUpdate,
+    userId
+  ) {
+    this._name = data.name;
+
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDlt = handleCardDlt;
+    this._id = data._id;
+    this._likes = data.likes;
+
+    this._cardLikeUpdate = cardLikeUpdate;
+    this._userId = userId;
+  }
+  getId() {
+    return this._id;
   }
   _getTemplate() {
     const cardElement = document
@@ -31,10 +46,23 @@ export default class Card {
 
   _handleLikeIcon() {
     this._cardsButtonForLike.classList.toggle("cards__like-button");
+    this._cardLikeUpdate(this);
+  }
+
+  setLikeInfo(likes) {
+    // console.log();
+    this._likes = likes;
+    this._updateLikesView();
+  }
+  _updateLikesView() {
+    console.log(this._likes.length);
+    document.querySelector(".cards__like-count").textContent =
+      this._likes.length;
   }
 
   _handleDeleteIcon() {
     this._element.remove();
+    this._handleCardDlt();
   }
 
   generateCard() {

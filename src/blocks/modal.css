@@ -11,6 +11,10 @@
   bottom: 0;
   transition: visibility 1s, opacity 0.5s linear;
 }
+.modals {
+  position: absolute;
+  top: 0;
+}
 
 .modal_opened {
   visibility: visible;

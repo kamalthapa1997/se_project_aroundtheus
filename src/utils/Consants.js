@@ -45,6 +45,8 @@ export const addFormElement = modalAddProfile.querySelector(".modal__form");
 export const profileAddImageEditor = document.querySelector(
   ".profile__add-editor"
 );
+
+export const profilePictureUpdate = document.querySelector(".profile__image");
 export const config = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",

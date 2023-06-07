@@ -12,10 +12,21 @@ import {
   editFormElement,
   addFormElement,
   profileAddImageEditor,
+  profilePictureUpdate,
 } from "../utils/Consants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import Api from "../components/Api.js";
+
+/////-----API
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "4fff85c9-91a1-4cf6-b04e-2066158cf62c ",
+    "Content-Type": "application/json",
+  },
+});
 
 /// ---Form Validation---////
 const editFormValidator = new FormValidator(config, editFormElement);
@@ -27,11 +38,25 @@ editFormValidator.enableValidation();
 ///  Create intances of classes
 
 const render = (data) => {
-  const cardEl = new Card(data, "#card-template", ({ name, link }) => {
-    imagePopup.open({ name, link });
-  });
+  const cardEl = new Card(
+    {
+      data,
+      handleCardClick: ({ name, link }) => {
+        imagePopup.open({ name, link });
+      },
+
+      handleCardDlt: () => {
+        const id = cardEl.getId();
+        // console.log(id);
+        api.deleteCard(id);
+      },
+    },
+    "#card-template",
+    cardLikeUpdate,
+    userId
+  );
   const cardElement = cardEl.generateCard();
-  cardSection.addItems(cardElement);
+  return cardElement;
 };
 
 ////////////--------------popupWithImage
@@ -40,21 +65,36 @@ const imagePopup = new PopupWithImage({ popupSelector: "#card-fullscreen" });
 imagePopup.setEventListeners();
 
 //// ----- intances of SECTION class
-const cardSection = new Section(
-  {
-    data: initialCards,
 
-    renderer: render,
-  },
-  Selector.cardSection
-);
-cardSection.renderItems();
+let userId;
+
+api.getAppInfo().then(([cards, userInfo]) => {
+  userId = userInfo._id;
+  console.log(userId);
+
+  const cardSection = new Section(
+    {
+      data: cards,
+
+      renderer: renderCard,
+    },
+    Selector.cardSection
+  );
+  cardSection.renderItems();
+  function renderCard(data) {
+    const cardImage = render(data);
+    // console.log(cardImage);
+
+    cardSection.addItems(cardImage);
+  }
+});
 
 ////----- Popup With Form -----////
 
 const newCardPupup = new PopupWithForm({
   popupSelector: "#modal-add-profile",
   handleSubmit: (inputValues) => {
+    api.postCard(inputValues);
     render(inputValues);
     newCardPupup.close();
   },
@@ -68,6 +108,7 @@ const profilePopup = new PopupWithForm({
   popupSelector: "#modal-edit-profile",
   handleSubmit: (data) => {
     userInfo.setUserInfo(data);
+    console.log(data);
     profilePopup.close();
   },
 });
@@ -86,3 +127,28 @@ profileAddImageEditor.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
   newCardPupup.open();
 });
+///////
+const profilePupop = new PopupWithForm({
+  popupSelector: "#profile-picture",
+  handleSubmit: (inputValues) => {
+    // api.postCard(inputValues);
+    render(inputValues);
+  },
+});
+profilePupop.setEventListeners();
+
+profilePictureUpdate.addEventListener("click", () => {
+  profilePupop.open();
+});
+
+function cardLikeUpdate(card) {
+  if (this._likes > 0) {
+    api.removeCardLike(card._id).then((data) => {
+      card.setLikeInfo(data.likes);
+    });
+  } else {
+    api.addCardLike(card._id).then((data) => {
+      card.setLikeInfo(data.likes);
+    });
+  }
+}

@@ -6,10 +6,15 @@
   gap: 20px;
 }
 .profile__image {
+  /* background: url(../images/jacques-cousteau.jpg) */
   margin-right: 30px;
-
   border-radius: 50%;
   width: 120px;
+  transition: opacity 0.2s linear;
+}
+.profile__image:hover {
+  opacity: 0.4;
+  background-image: url(../images/profileEditor.svg);
 }
 .profile__informations {
   display: grid;
