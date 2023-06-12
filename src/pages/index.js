@@ -81,7 +81,6 @@ const render = (data) => {
       if (cardEl.isLiked()) {
         api.removeCardLike(id).then((data) => {
           cardEl.setLikes(data.likes);
-          console.log(data);
         });
       } else {
         api.addCardLike(id).then((data) => {
@@ -167,7 +166,7 @@ const profilePopup = new PopupWithForm(
         .setProfileInfo(data.name, data.about)
         .then((info) => {
           userInfo.setUserInfo(info.name, info.about, info.avatar);
-          console.log(info.name, info.about, info.avatar);
+
           profilePopup.close();
         })
         .catch((err) => {
@@ -188,7 +187,7 @@ profileInfoEditor.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   profileName.value = userData.name;
   profileJob.value = userData.about;
-  console.log(profileJob.value);
+
   editFormValidator.toggleButtonState();
   profilePopup.open();
 });
