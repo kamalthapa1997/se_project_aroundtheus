@@ -46,7 +46,15 @@ export const profileAddImageEditor = document.querySelector(
   ".profile__add-editor"
 );
 
-export const profilePictureUpdate = document.querySelector(".profile__image");
+//
+export const profileAddFormEl = document.querySelector(
+  "#modal-profile-picture"
+);
+export const addProfileAvtarEl = profileModal.querySelector(".modal__form");
+
+export const profilePictureUpdate = document.querySelector(
+  ".profile__avatar-box"
+);
 export const config = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",

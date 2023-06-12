@@ -11,6 +11,7 @@
   padding: 0;
   margin: 0;
 }
+
 .cards__content {
   border-radius: 10px;
   overflow: hidden;
@@ -102,6 +103,7 @@
   max-height: 12px;
 }
 .cards__like-count {
+  display: block;
   margin: 0;
   color: #000000;
   text-align: center;

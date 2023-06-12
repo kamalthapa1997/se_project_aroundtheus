@@ -1,24 +1,34 @@
 export default class Card {
-  constructor(
-    { data, handleCardClick, handleCardDlt },
+  constructor({
+    data,
+    handleCardClick,
+    handleCardDlt,
     cardSelector,
     cardLikeUpdate,
-    userId
-  ) {
+    userId,
+  }) {
     this._name = data.name;
-
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDlt = handleCardDlt;
     this._id = data._id;
     this._likes = data.likes;
-
     this._cardLikeUpdate = cardLikeUpdate;
     this._userId = userId;
   }
   getId() {
     return this._id;
+  }
+  isLiked() {
+    return this._likes.some((like) => {
+      return like._id === this._userId;
+    });
+  }
+  setLikes(likes) {
+    this._likes = likes;
+    this._handleLikeIcon();
+    this._updateLikesView();
   }
   _getTemplate() {
     const cardElement = document
@@ -30,39 +40,35 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardsButtonForLike.addEventListener(
-      "click",
-      this._handleLikeIcon.bind(this)
-    );
+    this._cardsButtonForLike.addEventListener("click", this._cardLikeUpdate);
 
     this._element
       .querySelector(".cards__delete-button")
-      .addEventListener("click", this._handleDeleteIcon.bind(this));
+      .addEventListener("click", () => {
+        this._handleCardDlt();
+      });
 
     this._cardsImage.addEventListener("click", () => {
       this._handleCardClick({ name: this._name, link: this._link });
     });
+    this._likeAmount = this._element.querySelector(".cards__like-count");
   }
 
   _handleLikeIcon() {
-    this._cardsButtonForLike.classList.toggle("cards__like-button");
-    this._cardLikeUpdate(this);
+    if (this.isLiked()) {
+      this._cardsButtonForLike.classList.add("cards__like-button");
+    } else {
+      this._cardsButtonForLike.classList.remove("cards__like-button");
+    }
   }
 
-  setLikeInfo(likes) {
-    // console.log();
-    this._likes = likes;
-    this._updateLikesView();
-  }
   _updateLikesView() {
-    console.log(this._likes.length);
-    document.querySelector(".cards__like-count").textContent =
-      this._likes.length;
+    this._likeAmount.textContent = this._likes.length;
   }
 
-  _handleDeleteIcon() {
+  handleDeleteIcon() {
     this._element.remove();
-    this._handleCardDlt();
+    // this._handleCardDlt();
   }
 
   generateCard() {
@@ -76,6 +82,8 @@ export default class Card {
     this._cardsImage.alt = this._name;
 
     this._setEventListeners();
+    this._handleLikeIcon();
+
     return this._element;
   }
 }

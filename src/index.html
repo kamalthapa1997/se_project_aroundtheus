@@ -21,12 +21,15 @@
       </header>
       <main class="main">
         <section class="profile">
-          <img
-            src=" <%= require('./images/jacques-cousteau.jpg')%>"
-            alt="Jacques Cousteau"
-            class="profile__image"
-          />
-          <!-- <img alt="Jacques Cousteau" class="profile__image" /> -->
+          <div class="profile__avatar-box">
+            <img
+              src=" <%= require('./images/jacques-cousteau.jpg')%>"
+              alt="Jacques Cousteau"
+              class="profile__image"
+            />
+            <button type="button" class="profile__avatar-edit-btn"></button>
+          </div>
+
           <div class="profile__informations">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button type="button" class="profile__editor"></button>
@@ -65,7 +68,7 @@
               <input
                 type="text"
                 id="modal-input-description"
-                name="title"
+                name="about"
                 class="modal__input"
                 placeholder="About"
                 required
@@ -117,8 +120,8 @@
 
       <!-- Profile change-->
 
-      <section class="modal" id="profile-picture">
-        <div class="modal__container">
+      <section class="modal" id="modal-profile-picture">
+        <div class="modal__container modal_profile-container">
           <button class="modal__close-tag"></button>
           <h2 class="modal__profile-heading">Create a profile picture</h2>
           <form class="modal__form" id="modal-add-form">
@@ -140,15 +143,23 @@
       </section>
 
       <!-- delete button -->
-      <section class="modal" id="cards-remove">
-        <div class="modal__container">
+
+      <section class="modal" id="card-delete">
+        <div class="modal__container modal_delete-container">
           <button class="modal__close-tag"></button>
           <h2 class="modal__profile-heading">Are you sure</h2>
-          <!-- <form class="modal__form" id="modal-add-form"> -->
-          <button type="submit" class="modal__button">Yes</button>
-          <!-- </form> -->
+          <form class="modal__form" id="modal-add-form">
+            <button
+              type="submit"
+              class="modal__button"
+              id="modal-delete-button"
+            >
+              Yes
+            </button>
+          </form>
         </div>
       </section>
+
       <!-- delete button -->
 
       <template id="card-template">
@@ -163,7 +174,7 @@
             <h2 class="cards__image-title"></h2>
             <div class="cards__buttons">
               <button type="button" class="cards__button"></button>
-              <span class="cards__like-count">0</span>
+              <span class="cards__like-count"></span>
             </div>
           </div>
         </li>

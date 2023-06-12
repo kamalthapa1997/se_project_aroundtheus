@@ -13,6 +13,8 @@
 }
 .modals {
   position: absolute;
+  width: 430px;
+  height: 181px;
   top: 0;
 }
 
@@ -32,6 +34,13 @@
   margin: auto;
 }
 
+.modal_profile-container {
+  height: 272px;
+}
+.modal_delete-container {
+  width: 430px;
+  height: 181px;
+}
 .modal__close-tag {
   background: url(../images/close-tag.svg) transparent no-repeat center;
   width: 40px;
@@ -126,6 +135,12 @@
     right: 0;
     width: 26px;
     height: 26px;
+  }
+  .modal_profile-container {
+    height: 272px;
+  }
+  .modal_delete-container {
+    height: 181px;
   }
 }
 

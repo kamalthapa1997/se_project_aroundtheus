@@ -6,16 +6,33 @@
   gap: 20px;
 }
 .profile__image {
-  /* background: url(../images/jacques-cousteau.jpg) */
   margin-right: 30px;
   border-radius: 50%;
   width: 120px;
-  transition: opacity 0.2s linear;
+  height: 120px;
 }
-.profile__image:hover {
-  opacity: 0.4;
-  background-image: url(../images/profileEditor.svg);
+.profile__avatar-box {
+  margin: 0;
+  position: relative;
 }
+.profile__avatar-edit-btn {
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 49px;
+  left: 49px;
+  background: transparent url(../images/profileEditor.svg) no-repeat center;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+.profile__avatar-box:hover .profile__avatar-edit-btn {
+  opacity: 100%;
+}
+.profile__avatar-box:hover .profile__image {
+  opacity: 0.5;
+}
+
 .profile__informations {
   display: grid;
   grid-template-areas:
@@ -84,6 +101,9 @@
     width: 100%;
     gap: 30px;
   }
+  .profile__avatar-box {
+    margin: 0;
+  }
   .profile__image {
     margin: 0;
   }
@@ -95,9 +115,10 @@
     width: 100%;
     gap: 0;
   }
-  .profile__image {
+  .profile__avatar-box {
     margin: auto;
   }
+
   .profile__title {
     font-size: 22px;
   }

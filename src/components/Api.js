@@ -5,7 +5,11 @@ export default class Api {
   }
 
   getAppInfo() {
-    return Promise.all([this.getInitialCards(), this.getUserId()]);
+    return Promise.all([
+      this.getInitialCards(),
+      this.getUserInfo(),
+      // this.userProfilePicture(),
+    ]);
   }
 
   getInitialCards() {
@@ -20,11 +24,11 @@ export default class Api {
       })
       .then((data) => {
         // console.log(data);
-        return data;
+        return data.reverse();
       });
   }
 
-  getUserId() {
+  getUserInfo() {
     return fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
       method: "GET",
       headers: this._headers,
@@ -41,7 +45,7 @@ export default class Api {
       });
   }
 
-  postCard({ title, link }) {
+  postNewCard({ title, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       body: JSON.stringify({
@@ -58,8 +62,6 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
       })
       .then((data) => {
-        this.getInitialCards();
-        // console.log(data);
         return data;
       });
   }
@@ -103,6 +105,23 @@ export default class Api {
       });
   }
 
+  getLikeCount(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "GET",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((likeData) => {
+        console.log(likeData.likes);
+        return likeData;
+      });
+  }
+
   addCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
@@ -114,15 +133,14 @@ export default class Api {
         }
         return Promise.reject(`Error: ${res.status}`);
       })
-      .then((data) => {
-        console.log(data.likes);
-        return data;
+      .then((likeData) => {
+        // console.log(likeData);
+        return likeData;
       });
   }
   removeCardLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
-
       headers: this._headers,
     })
       .then((res) => {
@@ -131,8 +149,50 @@ export default class Api {
         }
         return Promise.reject(`Error: ${res.status}`);
       })
+      .then((likeData) => {
+        return likeData;
+      });
+  }
+
+  profileAvatarUpdate(link) {
+    return fetch(
+      "https://around.nomoreparties.co/v1/group-12/users/me/avatar ",
+      {
+        method: "PATCH",
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: link,
+        }),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
       .then((data) => {
-        return data;
+        return data.avatar;
+      });
+  }
+  setProfileInfo(name, about) {
+    return fetch("https://around.nomoreparties.co/v1/group-12/users/me ", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((info) => {
+        console.log(info.name);
+        return info;
       });
   }
 }
