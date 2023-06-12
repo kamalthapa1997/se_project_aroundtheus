@@ -7,6 +7,7 @@ export default class PopupConfirmation extends Popup {
     this._deleteBtn = this._popupElement.querySelector("#modal-delete-button");
     this._modalProfileSaveBtn =
       this._popupElement.querySelector(".modal__button");
+    this._modalProfileSaveBtnText = this._modalProfileSaveBtn.textContent;
   }
 
   setConfirmHandler = (handle) => {
@@ -14,14 +15,15 @@ export default class PopupConfirmation extends Popup {
   };
   renderLoading(isLoading) {
     if (isLoading) {
-      this._modalProfileSaveBtn = this._loadingText;
+      this._modalProfileSaveBtn.textContent = this._loadingText;
     } else {
-      this._modalProfileSaveBtn = this._modalProfileSaveBtn;
+      this._modalProfileSaveBtn.textContent = this._modalProfileSaveBtnText;
     }
   }
 
   setEventListeners() {
     super.setEventListeners();
+
     this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
 

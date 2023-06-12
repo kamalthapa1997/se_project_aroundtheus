@@ -27,8 +27,7 @@ export default class Card {
   }
   setLikes(likes) {
     this._likes = likes;
-    this._updateLikesView();
-    this._updateLikesCount();
+    this._renderLikes();
   }
   _getTemplate() {
     const cardElement = document
@@ -38,9 +37,19 @@ export default class Card {
 
     return cardElement;
   }
+  _renderLikes() {
+    this._element.querySelector(".cards__like-count").textContent =
+      this._likes.length;
 
-  _setEventListeners() {
-    this._cardsButtonForLike.addEventListener("click", this._cardLikeUpdate);
+    this._element
+      .querySelector(".cards__button")
+      .classList.toggle("cards__like-button", this.isLiked());
+  }
+
+  setEventListeners() {
+    this._cardsButtonForLike.addEventListener("click", () => {
+      this._cardLikeUpdate();
+    });
 
     this._element
       .querySelector(".cards__delete-button")
@@ -54,21 +63,9 @@ export default class Card {
     this._likeAmount = this._element.querySelector(".cards__like-count");
   }
 
-  _updateLikesView() {
-    if (this.isLiked()) {
-      this._cardsButtonForLike.classList.add("cards__like-button");
-    } else {
-      this._cardsButtonForLike.classList.remove("cards__like-button");
-    }
-  }
-
-  _updateLikesCount() {
-    this._likeAmount.textContent = this._likes.length;
-  }
-
   handleDeleteIcon() {
     this._element.remove();
-    // this._handleCardDlt();
+    this._element = null;
   }
 
   generateCard() {
@@ -81,8 +78,7 @@ export default class Card {
     this.cardsImageTitle.textContent = this._name;
     this._cardsImage.alt = this._name;
 
-    this._setEventListeners();
-    this._updateLikesView();
+    this._renderLikes();
 
     return this._element;
   }

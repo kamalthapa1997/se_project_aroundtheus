@@ -82,6 +82,7 @@ const renderCard = (data) => {
           .removeCardLike(id)
           .then((data) => {
             cardEl.setLikes(data.likes);
+            return data;
           })
           .catch((err) => {
             console.error(err);
@@ -91,6 +92,7 @@ const renderCard = (data) => {
           .addCardLike(id)
           .then((data) => {
             cardEl.setLikes(data.likes);
+            return data;
           })
           .catch((err) => {
             console.error(err);
@@ -100,7 +102,8 @@ const renderCard = (data) => {
     cardSelector: "#card-template",
   });
   const cardElement = cardEl.generateCard();
-  cardEl.setLikes(data.likes);
+  cardEl.setEventListeners();
+  // cardEl.setLikes(data.likes);
   return cardElement;
 };
 
@@ -116,27 +119,32 @@ function render(data) {
   cardSection.addItems(cardImage);
 }
 
-api.getAppInfo().then(([cards, getUserInfo]) => {
-  userId = getUserInfo._id;
+api
+  .getAppInfo()
+  .then(([cards, getUserInfo]) => {
+    userId = getUserInfo._id;
 
-  userInfo = new UserInfo(
-    ".profile__title",
-    ".profile__subtitle",
-    ".profile__image",
-    ".profile__avatar-box"
-  );
-  userInfo.setProfileImage(getUserInfo.avatar);
-  userInfo.setUserInfo(getUserInfo.name, getUserInfo.about);
+    userInfo = new UserInfo(
+      ".profile__title",
+      ".profile__subtitle",
+      ".profile__image",
+      ".profile__avatar-box"
+    );
+    userInfo.setProfileImage(getUserInfo.avatar);
+    userInfo.setUserInfo(getUserInfo.name, getUserInfo.about);
 
-  cardSection = new Section(
-    {
-      data: cards,
-      renderer: render,
-    },
-    Selector.cardSection
-  );
-  cardSection.renderItems();
-});
+    cardSection = new Section(
+      {
+        data: cards,
+        renderer: render,
+      },
+      Selector.cardSection
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 ////----- Popup With Form -----////
 
@@ -220,7 +228,7 @@ const profilePupop = new PopupWithForm(
           console.error(err);
         })
         .finally(() => {
-          profilePopup.renderLoading(false);
+          profilePupop.renderLoading(false);
         });
     },
   },
