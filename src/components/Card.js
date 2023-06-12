@@ -27,8 +27,8 @@ export default class Card {
   }
   setLikes(likes) {
     this._likes = likes;
-    this._handleLikeIcon();
     this._updateLikesView();
+    this._updateLikesCount();
   }
   _getTemplate() {
     const cardElement = document
@@ -54,7 +54,7 @@ export default class Card {
     this._likeAmount = this._element.querySelector(".cards__like-count");
   }
 
-  _handleLikeIcon() {
+  _updateLikesView() {
     if (this.isLiked()) {
       this._cardsButtonForLike.classList.add("cards__like-button");
     } else {
@@ -62,7 +62,7 @@ export default class Card {
     }
   }
 
-  _updateLikesView() {
+  _updateLikesCount() {
     this._likeAmount.textContent = this._likes.length;
   }
 
@@ -82,7 +82,7 @@ export default class Card {
     this._cardsImage.alt = this._name;
 
     this._setEventListeners();
-    this._handleLikeIcon();
+    this._updateLikesView();
 
     return this._element;
   }

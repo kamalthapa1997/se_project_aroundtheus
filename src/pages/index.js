@@ -17,7 +17,7 @@ import {
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import Api from "../components/Api.js";
+import Api from "../utils/Api.js";
 import PopupConfirmation from "../components/PopupConfirmation.js";
 let cardSection;
 let userId;
@@ -46,7 +46,7 @@ const cardDltModel = new PopupConfirmation(
 
 cardDltModel.setEventListeners();
 
-const render = (data) => {
+const renderCard = (data) => {
   const cardEl = new Card({
     data,
     handleCardClick: ({ name, link }) => {
@@ -54,11 +54,10 @@ const render = (data) => {
     },
 
     handleCardDlt: () => {
-      cardDltModel.renderLoading(true);
-
       cardDltModel.open();
 
       cardDltModel.setConfirmHandler(() => {
+        cardDltModel.renderLoading(true);
         const cardId = cardEl.getId();
         api
           .deleteCard(cardId)
@@ -79,13 +78,23 @@ const render = (data) => {
     cardLikeUpdate: () => {
       const id = cardEl.getId();
       if (cardEl.isLiked()) {
-        api.removeCardLike(id).then((data) => {
-          cardEl.setLikes(data.likes);
-        });
+        api
+          .removeCardLike(id)
+          .then((data) => {
+            cardEl.setLikes(data.likes);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       } else {
-        api.addCardLike(id).then((data) => {
-          cardEl.setLikes(data.likes);
-        });
+        api
+          .addCardLike(id)
+          .then((data) => {
+            cardEl.setLikes(data.likes);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
     },
     cardSelector: "#card-template",
@@ -102,8 +111,8 @@ imagePopup.setEventListeners();
 
 //// ----- intances of SECTION class
 
-function renderCard(data) {
-  const cardImage = render(data);
+function render(data) {
+  const cardImage = renderCard(data);
   cardSection.addItems(cardImage);
 }
 
@@ -116,13 +125,13 @@ api.getAppInfo().then(([cards, getUserInfo]) => {
     ".profile__image",
     ".profile__avatar-box"
   );
-  userInfo.updateProfileImage(getUserInfo.avatar);
-  userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
+  userInfo.setProfileImage(getUserInfo.avatar);
+  userInfo.setUserInfo(getUserInfo.name, getUserInfo.about);
 
   cardSection = new Section(
     {
       data: cards,
-      renderer: renderCard,
+      renderer: render,
     },
     Selector.cardSection
   );
@@ -139,7 +148,8 @@ const newCardPupup = new PopupWithForm(
       api
         .postNewCard(inputValues)
         .then((data) => {
-          renderCard(data);
+          render(data);
+          newCardPupup.close();
         })
         .catch((err) => {
           console.error(err);
@@ -147,8 +157,6 @@ const newCardPupup = new PopupWithForm(
         .finally(() => {
           newCardPupup.renderLoading(false);
         });
-
-      newCardPupup.close();
     },
   },
   "Saving..."
@@ -205,7 +213,8 @@ const profilePupop = new PopupWithForm(
       api
         .profileAvatarUpdate(inputValues.link)
         .then(() => {
-          userInfo.updateProfileImage(inputValues.link);
+          userInfo.setProfileImage(inputValues.link);
+          profilePupop.close();
         })
         .catch((err) => {
           console.error(err);

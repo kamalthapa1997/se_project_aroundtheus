@@ -14,21 +14,15 @@ export default class UserInfo {
     return {
       name: this._name.textContent,
       about: this._title.textContent,
-      avatar: this._profileImage.src,
     };
   }
-  // getAvatar() {
-  //   return this._profileImage.src;
-  // }
 
-  updateProfileImage(link) {
+  setProfileImage(link) {
     this._profileImage.src = link;
-    // console.log(this._profileImage.src);
   }
 
-  setUserInfo(name, about, avatar) {
+  setUserInfo(name, about) {
     this._name.textContent = name;
     this._title.textContent = about;
-    this._profileImage.src = avatar;
   }
 }
